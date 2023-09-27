@@ -13,19 +13,13 @@ loadPyodide({ indexURL: PYODIDE_BASE_URL }).then((pyodide) => {
     # My python code here
   `);
 
-  fetch('py.py') // Replace with the actual path
-  .then((response) => response.text())
-  .then((pythonCode) => {
-      // Run Python code
-      pyodide.runPython(pythonCode).then(output => {
-          // Display the Python output
-          outputDiv.textContent = `Python Output: ${output}`;
-      }).catch(error => {
-          console.error('Error running Python:', error);
-      });
-  })
-  .catch(error => {
-      console.error('Error fetching Python script:', error);
+ 
+  $.ajax({
+    type: "GET",
+    url: "./py.py",
+  }).done(function( o ) {
+    console.log('a');
+     // do something
   });
 });});
 });
