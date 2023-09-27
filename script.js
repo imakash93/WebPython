@@ -18,7 +18,9 @@ loadPyodide({ indexURL: PYODIDE_BASE_URL }).then((pyodide) => {
     type: "GET",
     url: "./py.py",
   }).done(function( o ) {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
     pyodide.runPython(o)});
 });});
 });
-
