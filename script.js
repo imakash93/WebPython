@@ -4,22 +4,19 @@ const outputDiv = document.getElementById('output');
 languagePluginLoader.then(() => {
     return pyodide.loadPackage(['numpy']);
 }).then(() => {
-    // Define Python code
-    const pythonCode = `
-import numpy as np
-
-# Example Python code
-arr = np.array([1, 2, 3, 4, 5])
-result = arr * 2
-
-result.tolist()
-    `;
-
-    // Run Python code
-    pyodide.runPython(pythonCode).then(output => {
-        // Display the Python output
-        outputDiv.textContent = `Python Output: ${output}`;
-    }).catch(error => {
-        console.error('Error running Python:', error);
-    });
+    // Fetch the Python script from an external file
+    fetch('py.py')
+        .then((response) => response.text())
+        .then((pythonCode) => {
+            // Run Python code
+            pyodide.runPython(pythonCode).then(output => {
+                // Display the Python output
+                outputDiv.textContent = `Python Output: ${output}`;
+            }).catch(error => {
+                console.error('Error running Python:', error);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching Python script:', error);
+        });
 });
