@@ -18,9 +18,7 @@ loadPyodide({ indexURL: PYODIDE_BASE_URL }).then((pyodide) => {
     type: "GET",
     url: "./py.py",
   }).done(function( o ) {
-    console.log('a');
-     // do something
-  });
+    pyodide.runPython(o)});
 });});
 });
 
